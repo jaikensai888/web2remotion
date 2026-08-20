@@ -18,6 +18,16 @@
     "finalHoldMs": 300
   },
   "anchors": {
+    "repositoryTitle": {
+      "text": "remotion",
+      "href": "/remotion-dev/remotion",
+      "left": 193,
+      "top": 89,
+      "width": 84,
+      "height": 27,
+      "centerX": 235,
+      "centerY": 102
+    },
     "scrollHeight": 4628,
     "viewportHeight": 1080,
     "scrollY": 0,

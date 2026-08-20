@@ -115,7 +115,36 @@ async function findHeadingInfo(page, heading) {
   }, normalized);
 }
 
-async function collectPageAnchors(page, heading) {
+async function findRepositoryTitleInfo(page, repositoryPath) {
+  const repositoryName = repositoryPath.split('/').filter(Boolean).at(-1);
+  return page.evaluate(({path, name}) => {
+    const normalize = (value) => String(value ?? '')
+      .normalize('NFKC')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLocaleLowerCase();
+    const match = Array.from(document.querySelectorAll('a')).find((node) => {
+      const rect = node.getBoundingClientRect();
+      const href = node.getAttribute('href') ?? '';
+      return rect.width > 0 && rect.height > 0 && rect.top >= 0 && rect.top < 160
+        && href === path && normalize(node.textContent) === normalize(name);
+    });
+    if (!match) return null;
+    const rect = match.getBoundingClientRect();
+    return {
+      text: (match.textContent ?? '').trim(),
+      href: match.getAttribute('href'),
+      left: Math.round(rect.left + window.scrollX),
+      top: Math.round(rect.top + window.scrollY),
+      width: Math.round(rect.width),
+      height: Math.round(rect.height),
+      centerX: Math.round(rect.left + window.scrollX + rect.width / 2),
+      centerY: Math.round(rect.top + window.scrollY + rect.height / 2)
+    };
+  }, {path: repositoryPath, name: repositoryName});
+}
+
+async function collectPageAnchors(page, heading, repositoryPath) {
   const headingInfo = await findHeadingInfo(page, heading);
   if (!headingInfo) {
     const headings = await page.evaluate(() => Array.from(document.querySelectorAll('main h1, main h2, main h3, main h4, main h5, main h6'))
@@ -123,6 +152,11 @@ async function collectPageAnchors(page, heading) {
       .filter(Boolean)
       .slice(0, 80));
     throw new Error(`README heading not found: ${heading}. Available headings: ${headings.join(' | ')}`);
+  }
+
+  const repositoryTitle = await findRepositoryTitleInfo(page, repositoryPath);
+  if (!repositoryTitle) {
+    throw new Error(`Repository title anchor not found for ${repositoryPath}.`);
   }
 
   const pageMetrics = await page.evaluate(() => {
@@ -138,6 +172,7 @@ async function collectPageAnchors(page, heading) {
   });
 
   return {
+    repositoryTitle,
     ...pageMetrics,
     heading: headingInfo,
     plan: buildCapturePlan({
@@ -242,7 +277,8 @@ export async function captureGithubReal({root = resolve(import.meta.dirname, '..
     await page.emulateMedia({colorScheme: 'dark'});
     await assertGithubPageReady(page, config.readmeHeading);
     readyOffsetMs = Date.now() - recordingStartedAt;
-    anchors = await collectPageAnchors(page, config.readmeHeading);
+    const repositoryPath = `/${parsedUrl.pathname.split('/').filter(Boolean).slice(0, 2).join('/')}`;
+    anchors = await collectPageAnchors(page, config.readmeHeading, repositoryPath);
     anchors.plan = buildCapturePlan({
       headingTop: anchors.heading.top,
       directoryTop: anchors.directoryTop,

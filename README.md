@@ -47,7 +47,7 @@ node --test tests/**/*.test.mjs
 
 | shot | start | end | duration | source | target | effectId | params | prompt | status |
 | --- | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |
-| shot-1 | 0.0 | 2.4 | 2.4 | captured-page | title | `camera-zoom` | `{"scaleTo":1.12,"origin":"center"}` | 标题平滑放大 | pending-confirmation |
+| shot-1 | 0.0 | 5.0 | 5.0 | captured-page | repository-title | `camera-zoom` | `{"scaleFrom":1,"scaleTo":3,"origin":"repository-title"}` | 镜头平滑到仓库 title，然后放大 3 倍 | pending-confirmation |
 | shot-2 | 2.4 | 3.0 | 0.6 | captured-page | search-button | `click-bounce` | `{"ripple":true}` | 点击按钮回弹 | pending-confirmation |
 
 用户确认表格前，不执行用户整片的整体时间线或整片 Remotion render；单个效果 GIF 可以使用真实 GitHub 录制作为阶段一视觉确认。确认后，阶段二才与现有 `github-remotion` 的整体成片流程衔接。

@@ -2,12 +2,14 @@ import React from 'react';
 import {
   AbsoluteFill,
   Easing,
+  Freeze,
   OffthreadVideo,
   Sequence,
   interpolate,
   staticFile,
   useCurrentFrame
 } from 'remotion';
+import captureMeta from '../source/capture/capture-meta.json';
 
 export const EFFECT_PREVIEW_SPEC = {
   width: 640,
@@ -25,6 +27,20 @@ const EFFECT_IDS = [
 ];
 
 const SOURCE = staticFile('capture/github-page.mp4');
+const TITLE_FOCUS = {x: 320, y: 142};
+const TITLE_ANCHOR = captureMeta.anchors?.repositoryTitle ?? {
+  centerX: 235,
+  centerY: 102
+};
+const CAPTURE_VIEWPORT = captureMeta.viewport ?? {width: 1920, height: 1080};
+const TITLE_SOURCE_POINT = {
+  x: (TITLE_ANCHOR.centerX / CAPTURE_VIEWPORT.width) * EFFECT_PREVIEW_SPEC.width,
+  y: (TITLE_ANCHOR.centerY / CAPTURE_VIEWPORT.height) * EFFECT_PREVIEW_SPEC.height
+};
+const TITLE_FREEZE_FRAME = Math.max(
+  0,
+  Math.round(((captureMeta.timeline?.topHoldMs ?? 3000) / 1000) * EFFECT_PREVIEW_SPEC.fps) - 1
+);
 const clamp01 = (value) => Math.max(0, Math.min(1, value));
 const frameProgress = (frame, start = 0, end = EFFECT_PREVIEW_SPEC.durationInFrames - 1) =>
   clamp01((frame - start) / Math.max(1, end - start));
@@ -49,10 +65,6 @@ function VideoLayer({style = {}, startFrom = 0}) {
 
 function pageTransform(effectId, frame) {
   switch (effectId) {
-    case 'camera-zoom': {
-      const scale = valueAt(frame, [0, 90, 180, 239], [1, 1.18, 1.34, 1.34]);
-      return `scale(${scale})`;
-    }
     case 'camera-pan': {
       const x = valueAt(frame, [0, 90, 180, 239], [0, -16, -48, -72]);
       const y = valueAt(frame, [0, 90, 180, 239], [0, -6, -26, -38]);
@@ -71,6 +83,36 @@ function pageTransform(effectId, frame) {
     default:
       return 'scale(1)';
   }
+}
+
+function titleZoomTransform(frame) {
+  const travelProgress = valueAt(frame, [0, 75], [0, 1]);
+  const scale = frame <= 75
+    ? valueAt(frame, [0, 75], [1, 1.08])
+    : valueAt(frame, [75, 150], [1.08, 3]);
+  const focusTranslation = frame <= 75 ? travelProgress : 1;
+  const translateX = (TITLE_FOCUS.x - TITLE_SOURCE_POINT.x * scale) * focusTranslation;
+  const translateY = (TITLE_FOCUS.y - TITLE_SOURCE_POINT.y * scale) * focusTranslation;
+  return {
+    transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`,
+    transformOrigin: '0 0'
+  };
+}
+
+function TitleZoomPage({frame}) {
+  const style = titleZoomTransform(frame);
+  return (
+    <AbsoluteFill style={{overflow: 'hidden'}}>
+      <Sequence from={0} durationInFrames={TITLE_FREEZE_FRAME + 1}>
+        <VideoLayer style={style} />
+      </Sequence>
+      <Sequence from={TITLE_FREEZE_FRAME + 1}>
+        <Freeze frame={TITLE_FREEZE_FRAME}>
+          <VideoLayer style={style} />
+        </Freeze>
+      </Sequence>
+    </AbsoluteFill>
+  );
 }
 
 function CursorGlyph({x, y, rotation = 0, opacity = 1}) {
@@ -175,6 +217,10 @@ function TransitionPage({effectId, frame}) {
 }
 
 function RealPage({effectId, frame}) {
+  if (effectId === 'camera-zoom') {
+    return <TitleZoomPage frame={frame} />;
+  }
+
   if (effectId === 'transition-hard-cut' || effectId === 'transition-fade') {
     return <TransitionPage effectId={effectId} frame={frame} />;
   }

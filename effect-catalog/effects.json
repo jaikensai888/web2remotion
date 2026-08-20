@@ -1,16 +1,16 @@
 [
   {
     "id": "camera-zoom",
-    "name": "镜头平滑放大",
+    "name": "镜头平滑到标题并放大",
     "category": "camera",
-    "keywords": ["平滑放大", "慢慢放大", "镜头推进", "zoom in"],
-    "promptExample": "镜头从页面中心平滑放大到 120%",
-    "defaults": {"scaleFrom": 1, "scaleTo": 1.2, "origin": "center", "easing": "easeInOut"},
+    "keywords": ["平滑到标题", "标题放大", "3倍放大", "镜头推进", "zoom in"],
+    "promptExample": "镜头平滑移动到仓库 title，然后以 title 为中心放大 3 倍",
+    "defaults": {"scaleFrom": 1, "scaleTo": 3, "origin": "repository-title", "focusDurationMs": 2500, "zoomDurationMs": 2500, "easing": "easeInOut"},
     "svg": "effect-catalog/svgs/camera-zoom.svg",
     "render": "camera-zoom",
-    "githubInstruction": "使用真实 GitHub 录制，连续推近仓库标题和简介区域，保持真实页面纹理清晰。",
+    "githubInstruction": "使用真实 GitHub 录制，先将镜头平滑移动并锁定在仓库 title，再以 title 为中心连续放大到 3 倍；保持真实页面纹理清晰。",
     "sourceRequirement": "captured-page",
-    "remotion": {"component": "CameraZoom", "input": "captured-page", "parameters": {"scaleFrom": "number", "scaleTo": "number", "origin": "point", "easing": "easing"}}
+    "remotion": {"component": "CameraZoomToTitle", "input": "captured-page", "parameters": {"scaleFrom": "number", "scaleTo": "number", "origin": "repository-title", "focusDurationFrames": "number", "zoomDurationFrames": "number", "easing": "easing"}}
   },
   {
     "id": "camera-pan",

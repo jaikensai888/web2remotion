@@ -34,18 +34,20 @@
     </header>
     <main class="grid">
       <article class="card" data-effect-id="camera-zoom">
-        <img class="gif-preview" src="../renders/effects/camera-zoom.gif" alt="镜头平滑放大 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <img class="gif-preview" src="../renders/effects/camera-zoom.gif" alt="镜头平滑到标题并放大 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
         <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
         <div class="copy">
           <div class="meta"><code>camera-zoom</code><span>camera</span></div>
-          <h2>镜头平滑放大</h2>
-          <p>镜头从页面中心平滑放大到 120%</p>
-          <p class="instruction"><strong>真实 GitHub 指令：</strong>使用真实 GitHub 录制，连续推近仓库标题和简介区域，保持真实页面纹理清晰。</p>
+          <h2>镜头平滑到标题并放大</h2>
+          <p>镜头平滑移动到仓库 title，然后以 title 为中心放大 3 倍</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>使用真实 GitHub 录制，先将镜头平滑移动并锁定在仓库 title，再以 title 为中心连续放大到 3 倍；保持真实页面纹理清晰。</p>
           <p class="requirement"><strong>素材要求：</strong><code>captured-page</code></p>
           <details><summary>默认参数</summary><pre>{
   &quot;scaleFrom&quot;: 1,
-  &quot;scaleTo&quot;: 1.2,
-  &quot;origin&quot;: &quot;center&quot;,
+  &quot;scaleTo&quot;: 3,
+  &quot;origin&quot;: &quot;repository-title&quot;,
+  &quot;focusDurationMs&quot;: 2500,
+  &quot;zoomDurationMs&quot;: 2500,
   &quot;easing&quot;: &quot;easeInOut&quot;
 }</pre></details>
         </div>

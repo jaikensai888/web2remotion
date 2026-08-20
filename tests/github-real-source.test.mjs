@@ -44,6 +44,20 @@ test('every effect has a real-GitHub instruction and an explicit source requirem
   }
 });
 
+test('camera zoom targets the measured repository title and reaches 3x', () => {
+  const catalog = loadCatalog(root);
+  const cameraZoom = catalog.find((effect) => effect.id === 'camera-zoom');
+  const source = readFileSync(resolve(root, 'src/EffectPreview.jsx'), 'utf8');
+  const captureMeta = JSON.parse(readFileSync(resolve(root, 'source/capture/capture-meta.json'), 'utf8'));
+
+  assert.equal(cameraZoom.defaults.scaleTo, 3);
+  assert.equal(cameraZoom.defaults.origin, 'repository-title');
+  assert.match(cameraZoom.promptExample, /title/);
+  assert.equal(captureMeta.anchors.repositoryTitle.text, 'remotion');
+  assert.match(source, /TITLE_SOURCE_POINT/);
+  assert.match(source, /Freeze/);
+});
+
 test('real source composition uses OffthreadVideo instead of drawing a fake webpage', () => {
   const source = readFileSync(resolve(root, 'src/EffectPreview.jsx'), 'utf8');
   assert.match(source, /OffthreadVideo/);

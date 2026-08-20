@@ -54,7 +54,7 @@ description: Use when a user wants to turn a real GitHub web-demo animation idea
 
 | shot | start | end | duration | source | target | effectId | params | prompt | status |
 | --- | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |
-| shot-1 | 0.0 | 2.4 | 2.4 | captured-page | title | `camera-zoom` | `{"scaleFrom":1,"scaleTo":1.12,"origin":"center"}` | 标题平滑放大 | pending-confirmation |
+| shot-1 | 0.0 | 5.0 | 5.0 | captured-page | repository-title | `camera-zoom` | `{"scaleFrom":1,"scaleTo":3,"origin":"repository-title"}` | 镜头平滑到仓库 title，然后放大 3 倍 | pending-confirmation |
 
 `params` 必须是可解析的 JSON object；如果展示为 `key=value`，也必须明确它等价于 object，不能输出无法消费的自由文本。
 
