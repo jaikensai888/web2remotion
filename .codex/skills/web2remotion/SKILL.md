@@ -7,7 +7,7 @@ description: Use when a user wants to turn a real GitHub web-demo animation idea
 
 ## Overview
 
-把用户对真实 GitHub 网页演示动画的自然语言描述，映射到本项目的稳定 effect ID、默认参数和剪辑表格。阶段一先用 Playwright 录制真实 GitHub 页面，再按每个 effect 的独立 `githubInstruction` 逐个生成 GIF；生成整片前仍要求用户确认剪辑表格。
+用户不需要记住 effect ID。把对真实 GitHub 网页演示动画的自然语言描述交给 AI，AI 读取本项目的效果目录，将描述映射到稳定的 effect ID、默认参数和剪辑表格。阶段一先用 Playwright 录制真实 GitHub 页面，再按每个 effect 的独立 `githubInstruction` 逐个生成 GIF；生成整片前仍要求用户确认剪辑表格。
 
 ## Scope and phase boundary
 
@@ -25,6 +25,17 @@ description: Use when a user wants to turn a real GitHub web-demo animation idea
 本阶段明确不负责：通用录制、光标/点击 telemetry、时间线编辑器、多媒体输入模型、PixiJS/Canvas 重绘、MP4 输出和整体成片逻辑。阶段一允许使用 `github-remotion` 的真实 GitHub 页面录制契约生成预览素材。
 
 ## Workflow
+
+### 0. Accept a natural-language request
+
+用户可以只描述意图，不必指定内部 ID。例如：
+
+```text
+镜头 1（0～5 秒）：镜头平滑移动到仓库 title，然后以 title 为中心放大 3 倍。
+请先给我剪辑表和对应 GIF，等我确认后再执行整片。
+```
+
+AI 必须先读取 `effects.json` 和 `prompt-map.md`，再将描述映射为已登记的 effect。对当前目录，这个请求应匹配 `camera-zoom`，目标区域为 `repository-title`，放大参数为 `scaleTo=3`。如果用户没有给出时间或强度，必须标记为建议值或推断值，不能伪装成用户指定值。
 
 ### 1. Read the effect catalog
 
