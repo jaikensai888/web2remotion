@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web2Remotion"
+  short_description: "Plan web demo effects with Remotion"
+  default_prompt: "Use $web2remotion to record a real GitHub page, turn this web demo idea into a shot-by-shot effect table, generate each supported effect GIF one by one, and wait for confirmation before overall execution."

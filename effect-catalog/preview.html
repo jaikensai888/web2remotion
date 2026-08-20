@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Web2Remotion Effect Catalog</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #020617; color: #e2e8f0; }
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 32px; background: radial-gradient(circle at top left, #172554, #020617 48%); }
+      header { max-width: 1280px; margin: 0 auto 28px; }
+      h1 { margin: 0 0 8px; font-size: 32px; }
+      header p { margin: 0; color: #94a3b8; }
+      .grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; }
+      .card { overflow: hidden; border: 1px solid #334155; border-radius: 18px; background: rgba(15, 23, 42, .88); box-shadow: 0 20px 60px rgba(0, 0, 0, .22); }
+      .card img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #0f172a; }
+      .missing-preview { aspect-ratio: 16 / 9; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: #cbd5e1; background: #111827; text-align: center; padding: 24px; }
+      .missing-preview strong { color: #fbbf24; }
+      .copy { padding: 16px 18px 18px; }
+      .meta { display: flex; align-items: center; justify-content: space-between; color: #94a3b8; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+      code { color: #67e8f9; }
+      h2 { margin: 10px 0 6px; font-size: 20px; }
+      p { margin: 0; color: #cbd5e1; line-height: 1.55; }
+      .instruction { margin-top: 10px; color: #a5f3fc; font-size: 13px; }
+      .requirement { margin-top: 8px; color: #94a3b8; font-size: 12px; }
+      details { margin-top: 12px; color: #94a3b8; }
+      pre { overflow: auto; margin: 8px 0 0; padding: 10px; border-radius: 10px; background: #020617; color: #a5f3fc; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Web2Remotion 特效目录</h1>
+      <p>阶段一：单个特效真实 GitHub GIF 预览 + Prompt 对照。共 15 个可被自然语言选择的 effect。</p>
+    </header>
+    <main class="grid">
+      <article class="card" data-effect-id="camera-zoom">
+        <img class="gif-preview" src="../renders/effects/camera-zoom.gif" alt="镜头平滑放大 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>camera-zoom</code><span>camera</span></div>
+          <h2>镜头平滑放大</h2>
+          <p>镜头从页面中心平滑放大到 120%</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>使用真实 GitHub 录制，连续推近仓库标题和简介区域，保持真实页面纹理清晰。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;scaleFrom&quot;: 1,
+  &quot;scaleTo&quot;: 1.2,
+  &quot;origin&quot;: &quot;center&quot;,
+  &quot;easing&quot;: &quot;easeInOut&quot;
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="camera-pan">
+        <img class="gif-preview" src="../renders/effects/camera-pan.gif" alt="镜头平滑平移 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>camera-pan</code><span>camera</span></div>
+          <h2>镜头平滑平移</h2>
+          <p>镜头从页面左上角平滑移动到右下角</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>使用真实 GitHub 录制，从仓库标题区域平滑横向/纵向移动到文件列表区域。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;from&quot;: {
+    &quot;x&quot;: 0,
+    &quot;y&quot;: 0
+  },
+  &quot;to&quot;: {
+    &quot;x&quot;: 160,
+    &quot;y&quot;: 72
+  },
+  &quot;easing&quot;: &quot;easeInOut&quot;
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="punch-in">
+        <img class="gif-preview" src="../renders/effects/punch-in.gif" alt="强调式快速推进 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>punch-in</code><span>camera</span></div>
+          <h2>强调式快速推进</h2>
+          <p>在按钮出现时快速推进 115%，随后回弹到 105%</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>使用真实 GitHub 录制，在 README 目标标题进入画面时快速推进到 115%，再回弹到 105%。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;peakScale&quot;: 1.15,
+  &quot;settleScale&quot;: 1.05,
+  &quot;durationMs&quot;: 420,
+  &quot;easing&quot;: &quot;backOut&quot;
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="cursor-smooth">
+        <img class="gif-preview" src="../renders/effects/cursor-smooth.gif" alt="光标平滑跟随 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>cursor-smooth</code><span>pointer</span></div>
+          <h2>光标平滑跟随</h2>
+          <p>让鼠标光标沿操作路径平滑移动，减少抖动</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>在真实 GitHub 页面录制层上叠加演示光标，让光标沿目标区域路径平滑移动；不重绘网页内容。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page-overlay</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;smoothing&quot;: 0.82,
+  &quot;trail&quot;: false,
+  &quot;cursorScale&quot;: 1
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="cursor-sway">
+        <img class="gif-preview" src="../renders/effects/cursor-sway.gif" alt="光标轻微摆动 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>cursor-sway</code><span>pointer</span></div>
+          <h2>光标轻微摆动</h2>
+          <p>光标停在按钮上时加入轻微自然摆动</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>在真实 GitHub 页面录制层上叠加演示光标，停在目标链接附近做轻微自然摆动。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page-overlay</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;amplitude&quot;: 3,
+  &quot;frequencyHz&quot;: 1.1,
+  &quot;rotationDeg&quot;: 2
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="click-bounce">
+        <img class="gif-preview" src="../renders/effects/click-bounce.gif" alt="点击回弹 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>click-bounce</code><span>pointer</span></div>
+          <h2>点击回弹</h2>
+          <p>点击按钮时做一个轻微回弹，并显示点击波纹</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>在真实 GitHub 页面录制层上的目标链接或按钮位置叠加点击回弹和点击波纹。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page-overlay</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;scalePeak&quot;: 0.92,
+  &quot;settleScale&quot;: 1,
+  &quot;ripple&quot;: true,
+  &quot;durationMs&quot;: 260
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="spotlight">
+        <img class="gif-preview" src="../renders/effects/spotlight.gif" alt="聚光灯聚焦 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>spotlight</code><span>focus</span></div>
+          <h2>聚光灯聚焦</h2>
+          <p>聚光灯聚焦在登录按钮上，其余区域略微变暗</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>在真实 GitHub 页面录制层上对 README 目标区域添加聚光遮罩，其余页面轻微变暗。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page-overlay</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;radius&quot;: 92,
+  &quot;dimOpacity&quot;: 0.58,
+  &quot;feather&quot;: 24,
+  &quot;followCursor&quot;: false
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="annotation-callout">
+        <img class="gif-preview" src="../renders/effects/annotation-callout.gif" alt="标注气泡 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>annotation-callout</code><span>annotation</span></div>
+          <h2>标注气泡</h2>
+          <p>在搜索框右侧出现一个带箭头的说明气泡：输入关键词</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>在真实 GitHub 页面录制层的目标标题或代码区域旁添加带箭头的说明气泡。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page-overlay</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;label&quot;: &quot;输入关键词&quot;,
+  &quot;accent&quot;: &quot;#f59e0b&quot;,
+  &quot;enter&quot;: &quot;fade-slide-up&quot;,
+  &quot;durationMs&quot;: 360
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="frame-rounded-shadow">
+        <img class="gif-preview" src="../renders/effects/frame-rounded-shadow.gif" alt="圆角阴影画框 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>frame-rounded-shadow</code><span>frame</span></div>
+          <h2>圆角阴影画框</h2>
+          <p>给网页画面加 24px 圆角和柔和阴影</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>将真实 GitHub 页面录制放入带圆角和柔和阴影的画框中，不改变页面内容。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;radius&quot;: 24,
+  &quot;shadowBlur&quot;: 30,
+  &quot;shadowOpacity&quot;: 0.28,
+  &quot;padding&quot;: 20
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="background-gradient-blur">
+        <img class="gif-preview" src="../renders/effects/background-gradient-blur.gif" alt="渐变模糊背景 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>background-gradient-blur</code><span>background</span></div>
+          <h2>渐变模糊背景</h2>
+          <p>网页后面铺一层蓝紫色渐变模糊背景</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>以真实 GitHub 页面录制作为前景，在其后添加低对比度渐变模糊氛围层。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;colors&quot;: [
+    &quot;#38bdf8&quot;,
+    &quot;#8b5cf6&quot;
+  ],
+  &quot;blur&quot;: 70,
+  &quot;opacity&quot;: 0.72
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="webcam-bubble">
+        <img class="gif-preview" src="../renders/effects/webcam-bubble.gif" alt="摄像头气泡 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>需要额外真实输入或可定位 DOM 区域</span></div>
+        <div class="copy">
+          <div class="meta"><code>webcam-bubble</code><span>overlay</span></div>
+          <h2>摄像头气泡</h2>
+          <p>右下角叠加一个带白色描边的圆形人像气泡</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>在真实 GitHub 页面录制右下角叠加真实摄像头视频气泡；缺少 webcam-video 时不生成。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>requires-extra-input</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;position&quot;: &quot;bottom-right&quot;,
+  &quot;size&quot;: 112,
+  &quot;borderWidth&quot;: 5,
+  &quot;shadow&quot;: true
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="browser-device-frame">
+        <img class="gif-preview" src="../renders/effects/browser-device-frame.gif" alt="浏览器设备外框 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>browser-device-frame</code><span>frame</span></div>
+          <h2>浏览器设备外框</h2>
+          <p>把网页放进一个带地址栏的浏览器窗口外框</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>将真实 GitHub 页面录制放入带地址栏的浏览器设备外框，页面内容保持真实。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;frame&quot;: &quot;browser&quot;,
+  &quot;chromeHeight&quot;: 34,
+  &quot;radius&quot;: 16,
+  &quot;showAddressBar&quot;: true
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="dynamic-block-reveal">
+        <img class="gif-preview" src="../renders/effects/dynamic-block-reveal.gif" alt="动态模块出现 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>需要额外真实输入或可定位 DOM 区域</span></div>
+        <div class="copy">
+          <div class="meta"><code>dynamic-block-reveal</code><span>reveal</span></div>
+          <h2>动态模块出现</h2>
+          <p>页面里的三个模块依次淡入并向上移动 16px</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>对真实 GitHub 页面中可定位的多个 DOM 区域做依次出现；只有单条录制视频时不伪造独立模块。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>requires-extra-input</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;staggerMs&quot;: 90,
+  &quot;distance&quot;: 16,
+  &quot;opacityFrom&quot;: 0,
+  &quot;opacityTo&quot;: 1,
+  &quot;easing&quot;: &quot;easeOut&quot;
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="transition-hard-cut">
+        <img class="gif-preview" src="../renders/effects/transition-hard-cut.gif" alt="硬切转场 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>transition-hard-cut</code><span>transition</span></div>
+          <h2>硬切转场</h2>
+          <p>镜头1结束后直接硬切到镜头2</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>使用真实 GitHub 录制中的两个不同时间段，做直接硬切，不重绘页面。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;durationFrames&quot;: 1,
+  &quot;color&quot;: &quot;#0f172a&quot;
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="transition-fade">
+        <img class="gif-preview" src="../renders/effects/transition-fade.gif" alt="淡入淡出转场 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>transition-fade</code><span>transition</span></div>
+          <h2>淡入淡出转场</h2>
+          <p>镜头之间用 300ms 的淡出淡入连接</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>使用真实 GitHub 录制中的两个不同时间段，做淡入淡出连接，不重绘页面。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;durationMs&quot;: 300,
+  &quot;color&quot;: &quot;#0f172a&quot;,
+  &quot;easing&quot;: &quot;easeInOut&quot;
+}</pre></details>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

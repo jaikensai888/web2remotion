@@ -1,0 +1,43 @@
+{
+  "sourceUrl": "https://github.com/remotion-dev/remotion",
+  "readmeHeading": "Get started",
+  "screenCount": 1,
+  "capturedAt": "2026-08-17T09:38:04.759Z",
+  "chromePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "readyOffsetMs": 5694,
+  "warmupSeconds": 5.044,
+  "timeline": {
+    "topHoldMs": 3000,
+    "directorySweepMs": 1000,
+    "headingTravelMs": 1000,
+    "readmeScrollMs": 3000,
+    "finalHoldMs": 300
+  },
+  "anchors": {
+    "scrollHeight": 4628,
+    "viewportHeight": 1080,
+    "scrollY": 0,
+    "directoryTop": 254,
+    "heading": {
+      "text": "Get started",
+      "tagName": "h2",
+      "top": 2655,
+      "height": 38
+    },
+    "plan": {
+      "directoryY": 1118,
+      "headingY": 2535,
+      "readmeEndY": 2535,
+      "maxScrollY": 3548,
+      "screenCount": 1
+    }
+  },
+  "files": {
+    "sourceVideo": "source/capture/github-page.mp4",
+    "manifest": "source/capture/capture-meta.json"
+  }
+}

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+coverage/
+.remotion-work/
+public/
+renders/effects/*.frames/
+.DS_Store
+Thumbs.db

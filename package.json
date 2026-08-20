@@ -1,0 +1,25 @@
+{
+  "name": "web2remotion",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Stage-one effect catalog and prompt map for web-to-Remotion videos.",
+  "scripts": {
+    "test": "node --test tests/**/*.test.mjs",
+    "catalog:build": "node scripts/build-effect-catalog.mjs",
+    "catalog:validate": "node scripts/validate-effect-catalog.mjs",
+    "capture:github": "node scripts/capture-github-real.mjs",
+    "effects:public": "node scripts/prepare-remotion-public.mjs",
+    "effects:render": "node scripts/render-effect-gifs.mjs",
+    "effects:verify": "node scripts/verify-effect-gifs.mjs"
+  },
+  "devDependencies": {
+    "@remotion/bundler": "^4.0.512",
+    "@remotion/cli": "^4.0.512",
+    "@remotion/renderer": "^4.0.512",
+    "playwright": "^1.62.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "remotion": "^4.0.512"
+  }
+}
