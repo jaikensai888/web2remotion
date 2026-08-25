@@ -63,6 +63,14 @@ function VideoLayer({style = {}, startFrom = 0}) {
   );
 }
 
+function PerspectiveVideoLayer({style = {}}) {
+  return (
+    <Freeze frame={0}>
+      <VideoLayer style={style} />
+    </Freeze>
+  );
+}
+
 function pageTransform(effectId, frame) {
   switch (effectId) {
     case 'camera-pan': {
@@ -127,11 +135,11 @@ function PerspectiveTiltPage({frame}) {
   return (
     <AbsoluteFill style={{overflow: 'hidden', background: 'radial-gradient(circle at 30% 20%, #1d4ed8 0%, #0b1220 46%, #020617 100%)'}}>
       <div style={{position: 'absolute', inset: -28, opacity: .22, filter: 'blur(26px) saturate(1.1)', transform: 'scale(1.08)'}}>
-        <VideoLayer />
+        <PerspectiveVideoLayer />
       </div>
       <div style={{position: 'absolute', inset: 0, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', transformStyle: 'preserve-3d'}}>
         <div style={{width: '100%', height: '100%', overflow: 'hidden', borderRadius: 18, boxShadow: '0 24px 64px rgba(0,0,0,.46)', transform: perspectiveTiltTransform(frame), transformOrigin: 'center center', transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', willChange: 'transform'}}>
-          <VideoLayer />
+          <PerspectiveVideoLayer />
         </div>
       </div>
     </AbsoluteFill>
