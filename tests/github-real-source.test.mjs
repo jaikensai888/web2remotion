@@ -66,18 +66,25 @@ test('perspective tilt keeps the real GitHub page as a 3D plane', () => {
   assert.ok(perspectiveTilt, 'perspective-tilt must be registered in the effect catalog');
   assert.equal(perspectiveTilt.sourceRequirement, 'captured-page');
   assert.equal(perspectiveTilt.defaults.perspectivePx, 1100);
+  assert.equal(perspectiveTilt.defaults.zoomDurationMs, 3000);
+  assert.equal(perspectiveTilt.defaults.tiltDurationMs, 2000);
   assert.equal(perspectiveTilt.defaults.scaleFrom, 1);
   assert.equal(perspectiveTilt.defaults.scaleTo, 2);
-  assert.equal(perspectiveTilt.defaults.rotateXFrom, 14);
-  assert.equal(perspectiveTilt.defaults.rotateYFrom, -26);
+  assert.equal(perspectiveTilt.defaults.rotateXFrom, 0);
+  assert.equal(perspectiveTilt.defaults.rotateXTo, 14);
+  assert.equal(perspectiveTilt.defaults.rotateYFrom, 0);
+  assert.equal(perspectiveTilt.defaults.rotateYTo, -26);
   assert.match(perspectiveTilt.promptExample, /透视/);
+  assert.match(perspectiveTilt.githubInstruction, /先.*放大.*2 倍.*再/);
   assert.match(source, /perspective-tilt/);
   assert.match(source, /perspective\(/);
   assert.match(source, /rotateX/);
   assert.match(source, /rotateY/);
-  assert.match(source, /\[14, 9, -2, -14\]/);
-  assert.match(source, /\[-26, -16, 8, 24\]/);
-  assert.match(source, /\[1, 1\.06, 2\]/);
+  assert.match(source, /PERSPECTIVE_ZOOM_END_FRAME = 90/);
+  assert.match(source, /PERSPECTIVE_TILT_END_FRAME = 150/);
+  assert.match(source, /\[1, 2, 2\]/);
+  assert.match(source, /\[0, 0, 14, 14\]/);
+  assert.match(source, /\[0, 0, -26, -26\]/);
 });
 
 test('real source composition uses OffthreadVideo instead of drawing a fake webpage', () => {
