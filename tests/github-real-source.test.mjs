@@ -62,12 +62,17 @@ test('perspective tilt keeps the real GitHub page as a 3D plane', () => {
   const catalog = loadCatalog(root);
   const perspectiveTilt = catalog.find((effect) => effect.id === 'perspective-tilt');
   const source = readFileSync(resolve(root, 'src/EffectPreview.jsx'), 'utf8');
+  const perspectiveTransformSource = source.slice(
+    source.indexOf('function perspectiveTiltTransform'),
+    source.indexOf('function PerspectiveTiltPage')
+  );
 
   assert.ok(perspectiveTilt, 'perspective-tilt must be registered in the effect catalog');
   assert.equal(perspectiveTilt.sourceRequirement, 'captured-page');
   assert.equal(perspectiveTilt.defaults.perspectivePx, 1100);
   assert.equal(perspectiveTilt.defaults.zoomDurationMs, 0);
   assert.equal(perspectiveTilt.defaults.tiltDurationMs, 2000);
+  assert.equal(perspectiveTilt.defaults.focusTarget, 'repository-title');
   assert.equal(perspectiveTilt.defaults.scaleFrom, 2);
   assert.equal(perspectiveTilt.defaults.scaleTo, 2);
   assert.equal(perspectiveTilt.defaults.rotateXFrom, 0);
@@ -75,8 +80,10 @@ test('perspective tilt keeps the real GitHub page as a 3D plane', () => {
   assert.equal(perspectiveTilt.defaults.rotateYFrom, 0);
   assert.equal(perspectiveTilt.defaults.rotateYTo, -26);
   assert.match(perspectiveTilt.promptExample, /透视/);
+  assert.match(perspectiveTilt.promptExample, /仓库名称/);
   assert.match(perspectiveTilt.promptExample, /已放大.*2 倍.*直接.*2 倍大小开始/);
   assert.match(perspectiveTilt.githubInstruction, /直接.*2 倍.*开始.*再/);
+  assert.match(perspectiveTilt.githubInstruction, /repository title|仓库名称/);
   assert.doesNotMatch(perspectiveTilt.githubInstruction, /先.*放大/);
   assert.match(source, /perspective-tilt/);
   assert.match(source, /perspective\(/);
@@ -85,6 +92,10 @@ test('perspective tilt keeps the real GitHub page as a 3D plane', () => {
   assert.doesNotMatch(source, /PERSPECTIVE_ZOOM_END_FRAME/);
   assert.match(source, /PERSPECTIVE_TILT_END_FRAME = 60/);
   assert.match(source, /const scale = 2;/);
+  assert.match(source, /PERSPECTIVE_TITLE_FOCUS/);
+  assert.match(source, /TITLE_SOURCE_POINT/);
+  assert.match(source, /PERSPECTIVE_TITLE_TRANSLATION/);
+  assert.match(perspectiveTransformSource, /PERSPECTIVE_TITLE_TRANSLATION/);
   assert.match(source, /\[0, PERSPECTIVE_TILT_END_FRAME, 239\], \[0, 14, 14\]/);
   assert.match(source, /\[0, PERSPECTIVE_TILT_END_FRAME, 239\], \[0, -26, -26\]/);
 });

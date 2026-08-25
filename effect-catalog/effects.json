@@ -30,13 +30,13 @@
     "name": "透视倾斜运镜",
     "category": "camera",
     "keywords": ["透视倾斜", "3D倾斜", "X轴旋转", "Y轴旋转", "透视变形", "缓慢运镜", "2倍放大", "重点推进", "perspective tilt"],
-    "promptExample": "将 GitHub 网页录屏当成一张已放大约 2 倍的平面，直接从 2 倍大小开始，再在平面上进行 X/Y 轴旋转、透视变形和缓慢运镜",
-    "defaults": {"perspectivePx": 1100, "zoomDurationMs": 0, "tiltDurationMs": 2000, "rotateXFrom": 0, "rotateXTo": 14, "rotateYFrom": 0, "rotateYTo": -26, "translateFrom": {"x": 0, "y": 0}, "translateTo": {"x": 16, "y": -8}, "scaleFrom": 2, "scaleTo": 2, "easing": "easeInOut"},
+    "promptExample": "将 GitHub 网页录屏当成一张已放大约 2 倍的平面，直接从 2 倍大小开始并让仓库名称清晰可见，再在这个平面上进行 X/Y 轴旋转、透视变形和缓慢运镜",
+    "defaults": {"perspectivePx": 1100, "zoomDurationMs": 0, "tiltDurationMs": 2000, "focusTarget": "repository-title", "rotateXFrom": 0, "rotateXTo": 14, "rotateYFrom": 0, "rotateYTo": -26, "translateFrom": {"x": 0, "y": 0}, "translateTo": {"x": 16, "y": -8}, "scaleFrom": 2, "scaleTo": 2, "easing": "easeInOut"},
     "svg": "effect-catalog/svgs/perspective-tilt.svg",
     "render": "perspective-tilt",
-    "githubInstruction": "使用真实 GitHub 录制，直接以约 2 倍大小的网页平面开始，不展示放大过程；再在这个 2 倍平面上逐渐施加明显的 X/Y 轴旋转、透视变形和轻微横纵运镜；保持网页内容清晰，不重绘网页。",
+    "githubInstruction": "使用真实 GitHub 录制，直接以约 2 倍大小的网页平面开始，让 repository title（仓库名称）保持在画面上方偏左且清晰可见，不展示放大过程；再在这个 2 倍平面上逐渐施加明显的 X/Y 轴旋转、透视变形和轻微横纵运镜；保持网页内容清晰，不重绘网页。",
     "sourceRequirement": "captured-page",
-    "remotion": {"component": "PerspectiveTilt", "input": "captured-page", "parameters": {"perspectivePx": "number", "tiltDurationFrames": "number", "rotateXFrom": "number", "rotateXTo": "number", "rotateYFrom": "number", "rotateYTo": "number", "translateFrom": "point", "translateTo": "point", "scale": "number", "easing": "easing"}}
+    "remotion": {"component": "PerspectiveTilt", "input": "captured-page", "parameters": {"perspectivePx": "number", "tiltDurationFrames": "number", "focusTarget": "string", "rotateXFrom": "number", "rotateXTo": "number", "rotateYFrom": "number", "rotateYTo": "number", "translateFrom": "point", "translateTo": "point", "scale": "number", "easing": "easing"}}
   },
   {
     "id": "punch-in",
