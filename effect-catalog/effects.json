@@ -26,6 +26,19 @@
     "remotion": {"component": "CameraPan", "input": "captured-page", "parameters": {"from": "point", "to": "point", "easing": "easing"}}
   },
   {
+    "id": "perspective-tilt",
+    "name": "透视倾斜运镜",
+    "category": "camera",
+    "keywords": ["透视倾斜", "3D倾斜", "X轴旋转", "Y轴旋转", "透视变形", "缓慢运镜", "perspective tilt"],
+    "promptExample": "将 GitHub 网页录屏当成一张平面，进行 X/Y 轴旋转、透视变形和缓慢运镜",
+    "defaults": {"perspectivePx": 1100, "rotateXFrom": 8, "rotateXTo": -4, "rotateYFrom": -15, "rotateYTo": 12, "translateFrom": {"x": -18, "y": 10}, "translateTo": {"x": 16, "y": -8}, "scaleFrom": 0.96, "scaleTo": 1.03, "easing": "easeInOut"},
+    "svg": "effect-catalog/svgs/perspective-tilt.svg",
+    "render": "perspective-tilt",
+    "githubInstruction": "使用真实 GitHub 录制，把网页视频当成一张平面，同时进行 X/Y 轴缓慢旋转、透视变形和轻微横纵运镜；保持网页内容清晰，不重绘网页。",
+    "sourceRequirement": "captured-page",
+    "remotion": {"component": "PerspectiveTilt", "input": "captured-page", "parameters": {"perspectivePx": "number", "rotateXFrom": "number", "rotateXTo": "number", "rotateYFrom": "number", "rotateYTo": "number", "translateFrom": "point", "translateTo": "point", "scaleFrom": "number", "scaleTo": "number", "easing": "easing"}}
+  },
+  {
     "id": "punch-in",
     "name": "强调式快速推进",
     "category": "camera",

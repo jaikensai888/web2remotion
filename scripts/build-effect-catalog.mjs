@@ -83,6 +83,8 @@ function render(effect) {
       return shell(effect, `${browserFrame()}${pageContent({focus: true})}<rect x="286" y="132" width="116" height="78" rx="12" fill="none" stroke="${colors.cyan}" stroke-width="3"/><path d="M442 106C506 116 524 150 510 190" fill="none" stroke="${colors.cyan}" stroke-width="4" stroke-linecap="round"/><path d="M500 180L512 194L494 194" fill="none" stroke="${colors.cyan}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="454" y="230" fill="${colors.cyan}" font-family="Arial, sans-serif" font-size="15" font-weight="700">100% → 120%</text>`);
     case 'camera-pan':
       return shell(effect, `${browserFrame()}${pageContent()}<rect x="100" y="126" width="188" height="112" rx="10" fill="none" stroke="${colors.cyan}" stroke-width="3" stroke-dasharray="9 6"/><rect x="344" y="126" width="188" height="112" rx="10" fill="none" stroke="${colors.amber}" stroke-width="3" stroke-dasharray="9 6"/>${arrow(286, 246, 344, 246)}<text x="242" y="278" fill="${colors.cyan}" font-family="Arial, sans-serif" font-size="14" font-weight="700">PAN</text>`);
+    case 'perspective-tilt':
+      return shell(effect, `<g transform="translate(320 180) rotate(-4) skewX(-8) scale(.96 .92) translate(-250 -124)">${browserFrame({x: 0, y: 0, width: 500, height: 248})}${pageContent({x: 16, y: 46, width: 468, height: 188})}</g><path d="M112 72L82 52M112 72L80 84M528 288L558 308M528 288L560 276" fill="none" stroke="${colors.cyan}" stroke-width="3" stroke-linecap="round"/><text x="198" y="314" fill="${colors.cyan}" font-family="Arial, sans-serif" font-size="15" font-weight="700">X/Y + PERSPECTIVE</text>`);
     case 'punch-in':
       return shell(effect, `${browserFrame()}${pageContent({focus: true})}<g stroke="${colors.pink}" stroke-width="4" stroke-linecap="round"><path d="M320 108V126M320 226V244M270 176H252M388 176H406"/><path d="M284 140L272 128M356 140L368 128M284 212L272 224M356 212L368 224"/></g><text x="250" y="278" fill="${colors.pink}" font-family="Arial, sans-serif" font-size="15" font-weight="700">PUNCH 115% → 105%</text>`);
     case 'cursor-smooth':
@@ -203,6 +205,7 @@ ${promptRows}
 `;
   writeFileSync(resolve(root, 'effect-catalog/preview.html'), preview, 'utf8');
 
+  const renderableCount = catalog.filter((effect) => effect.sourceRequirement !== 'requires-extra-input').length;
   const catalogReadme = `# Effect Catalog
 
 阶段一的效果资产目录。每个效果由 \`effects.json\` 描述，并有一个同名的真实 GitHub 录制 GIF；SVG 仅作为旧版结构源图，不作为真实素材预览。
@@ -210,8 +213,8 @@ ${promptRows}
 - \`effects.json\`：稳定的 effect ID、关键词、Prompt 示例、默认参数和未来 Remotion 参数形状。
 - \`prompt-map.md\`：给用户确认剪辑表格时使用的 Prompt 对照表。
 - \`preview.html\`：离线预览真实 GitHub GIF，不加载远程资源；缺少真实素材时明确显示未生成，不回退到手绘网页。
-- \`svgs/\`：15 个独立效果预览，画布统一为 640×360。
-- \`../renders/effects/\`：当前 13 个基于真实 GitHub 录制的 GIF，默认约 8 秒、640×360、15fps、无限循环；需要额外输入的效果不会生成假素材。
+- \`svgs/\`：${catalog.length} 个独立效果预览，画布统一为 640×360。
+- \`../renders/effects/\`：当前 ${renderableCount} 个基于真实 GitHub 录制的 GIF，默认约 8 秒、640×360、15fps、无限循环；需要额外输入的效果不会生成假素材。
 
 运行 \`npm run catalog:build\` 可以从目录数据重新生成 SVG、Prompt 表和预览页；运行 \`npm run effects:render\` 生成 GIF，运行 \`npm run effects:verify\` 校验输出。
 `;

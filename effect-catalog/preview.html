@@ -30,7 +30,7 @@
   <body>
     <header>
       <h1>Web2Remotion 特效目录</h1>
-      <p>阶段一：单个特效真实 GitHub GIF 预览 + Prompt 对照。共 15 个可被自然语言选择的 effect。</p>
+      <p>阶段一：单个特效真实 GitHub GIF 预览 + Prompt 对照。共 16 个可被自然语言选择的 effect。</p>
     </header>
     <main class="grid">
       <article class="card" data-effect-id="camera-zoom">
@@ -70,6 +70,35 @@
     &quot;x&quot;: 160,
     &quot;y&quot;: 72
   },
+  &quot;easing&quot;: &quot;easeInOut&quot;
+}</pre></details>
+        </div>
+      </article>
+      <article class="card" data-effect-id="perspective-tilt">
+        <img class="gif-preview" src="../renders/effects/perspective-tilt.gif" alt="透视倾斜运镜 real GitHub preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="missing-preview" style="display:none"><strong>暂未生成真实 GIF</strong><span>请先运行 npm run capture:github</span></div>
+        <div class="copy">
+          <div class="meta"><code>perspective-tilt</code><span>camera</span></div>
+          <h2>透视倾斜运镜</h2>
+          <p>将 GitHub 网页录屏当成一张平面，进行 X/Y 轴旋转、透视变形和缓慢运镜</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>使用真实 GitHub 录制，把网页视频当成一张平面，同时进行 X/Y 轴缓慢旋转、透视变形和轻微横纵运镜；保持网页内容清晰，不重绘网页。</p>
+          <p class="requirement"><strong>素材要求：</strong><code>captured-page</code></p>
+          <details><summary>默认参数</summary><pre>{
+  &quot;perspectivePx&quot;: 1100,
+  &quot;rotateXFrom&quot;: 8,
+  &quot;rotateXTo&quot;: -4,
+  &quot;rotateYFrom&quot;: -15,
+  &quot;rotateYTo&quot;: 12,
+  &quot;translateFrom&quot;: {
+    &quot;x&quot;: -18,
+    &quot;y&quot;: 10
+  },
+  &quot;translateTo&quot;: {
+    &quot;x&quot;: 16,
+    &quot;y&quot;: -8
+  },
+  &quot;scaleFrom&quot;: 0.96,
+  &quot;scaleTo&quot;: 1.03,
   &quot;easing&quot;: &quot;easeInOut&quot;
 }</pre></details>
         </div>

@@ -20,7 +20,7 @@ export const EFFECT_PREVIEW_SPEC = {
 };
 
 const EFFECT_IDS = [
-  'camera-zoom', 'camera-pan', 'punch-in', 'cursor-smooth', 'cursor-sway',
+  'camera-zoom', 'camera-pan', 'perspective-tilt', 'punch-in', 'cursor-smooth', 'cursor-sway',
   'click-bounce', 'spotlight', 'annotation-callout', 'frame-rounded-shadow',
   'background-gradient-blur', 'webcam-bubble', 'browser-device-frame',
   'dynamic-block-reveal', 'transition-hard-cut', 'transition-fade'
@@ -97,6 +97,30 @@ function titleZoomTransform(frame) {
     transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`,
     transformOrigin: '0 0'
   };
+}
+
+function perspectiveTiltTransform(frame) {
+  const rotateX = valueAt(frame, [0, 60, 150, 239], [8, 5, -1, -4]);
+  const rotateY = valueAt(frame, [0, 60, 150, 239], [-15, -9, 4, 12]);
+  const translateX = valueAt(frame, [0, 239], [-18, 16]);
+  const translateY = valueAt(frame, [0, 239], [10, -8]);
+  const scale = valueAt(frame, [0, 60, 239], [.96, .99, 1.03]);
+  return `perspective(1100px) translate3d(${translateX}px, ${translateY}px, 0) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+}
+
+function PerspectiveTiltPage({frame}) {
+  return (
+    <AbsoluteFill style={{overflow: 'hidden', background: 'radial-gradient(circle at 30% 20%, #1d4ed8 0%, #0b1220 46%, #020617 100%)'}}>
+      <div style={{position: 'absolute', inset: -28, opacity: .22, filter: 'blur(26px) saturate(1.1)', transform: 'scale(1.08)'}}>
+        <VideoLayer />
+      </div>
+      <div style={{position: 'absolute', inset: 0, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', transformStyle: 'preserve-3d'}}>
+        <div style={{width: '100%', height: '100%', overflow: 'hidden', borderRadius: 18, boxShadow: '0 24px 64px rgba(0,0,0,.46)', transform: perspectiveTiltTransform(frame), transformOrigin: 'center center', transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', willChange: 'transform'}}>
+          <VideoLayer />
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 }
 
 function TitleZoomPage({frame}) {
@@ -219,6 +243,10 @@ function TransitionPage({effectId, frame}) {
 function RealPage({effectId, frame}) {
   if (effectId === 'camera-zoom') {
     return <TitleZoomPage frame={frame} />;
+  }
+
+  if (effectId === 'perspective-tilt') {
+    return <PerspectiveTiltPage frame={frame} />;
   }
 
   if (effectId === 'transition-hard-cut' || effectId === 'transition-fade') {

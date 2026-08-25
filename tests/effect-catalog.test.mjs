@@ -11,6 +11,7 @@ const root = resolve(import.meta.dirname, '..');
 const expectedIds = [
   'camera-zoom',
   'camera-pan',
+  'perspective-tilt',
   'punch-in',
   'cursor-smooth',
   'cursor-sway',
@@ -162,6 +163,6 @@ test('generated prompt map and preview page expose every effect exactly once', (
     assert.equal(gifPreviewOccurrences.length, 1, `${effect.id} must expose one GIF preview`);
   }
   const catalogReadme = readFileSync(resolve(root, 'effect-catalog/README.md'), 'utf8');
-  assert.match(catalogReadme, /15 个独立效果预览/);
-  assert.match(catalogReadme, /当前 13 个基于真实 GitHub 录制的 GIF/);
+  assert.match(catalogReadme, /16 个独立效果预览/);
+  assert.match(catalogReadme, /当前 14 个基于真实 GitHub 录制的 GIF/);
 });

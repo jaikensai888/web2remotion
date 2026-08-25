@@ -58,6 +58,23 @@ test('camera zoom targets the measured repository title and reaches 3x', () => {
   assert.match(source, /Freeze/);
 });
 
+test('perspective tilt keeps the real GitHub page as a 3D plane', () => {
+  const catalog = loadCatalog(root);
+  const perspectiveTilt = catalog.find((effect) => effect.id === 'perspective-tilt');
+  const source = readFileSync(resolve(root, 'src/EffectPreview.jsx'), 'utf8');
+
+  assert.ok(perspectiveTilt, 'perspective-tilt must be registered in the effect catalog');
+  assert.equal(perspectiveTilt.sourceRequirement, 'captured-page');
+  assert.equal(perspectiveTilt.defaults.perspectivePx, 1100);
+  assert.equal(perspectiveTilt.defaults.rotateXFrom, 8);
+  assert.equal(perspectiveTilt.defaults.rotateYFrom, -15);
+  assert.match(perspectiveTilt.promptExample, /透视/);
+  assert.match(source, /perspective-tilt/);
+  assert.match(source, /perspective\(/);
+  assert.match(source, /rotateX/);
+  assert.match(source, /rotateY/);
+});
+
 test('real source composition uses OffthreadVideo instead of drawing a fake webpage', () => {
   const source = readFileSync(resolve(root, 'src/EffectPreview.jsx'), 'utf8');
   assert.match(source, /OffthreadVideo/);

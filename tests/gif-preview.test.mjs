@@ -9,8 +9,8 @@ const root = resolve(import.meta.dirname, '..');
 test('GIF preview plan covers the approved effect catalog with one stable output per effect', () => {
   const plan = createGifRenderPlan(root);
 
-  assert.equal(plan.length, 13);
-  assert.equal(new Set(plan.map((item) => item.effectId)).size, 13);
+  assert.equal(plan.length, 14);
+  assert.equal(new Set(plan.map((item) => item.effectId)).size, 14);
   assert.deepEqual(GIF_PREVIEW_SPEC, {
     width: 640,
     height: 360,
