@@ -99,15 +99,14 @@ function titleZoomTransform(frame) {
   };
 }
 
-const PERSPECTIVE_ZOOM_END_FRAME = 90;
-const PERSPECTIVE_TILT_END_FRAME = 150;
+const PERSPECTIVE_TILT_END_FRAME = 60;
 
 function perspectiveTiltTransform(frame) {
-  const rotateX = valueAt(frame, [0, PERSPECTIVE_ZOOM_END_FRAME, PERSPECTIVE_TILT_END_FRAME, 239], [0, 0, 14, 14]);
-  const rotateY = valueAt(frame, [0, PERSPECTIVE_ZOOM_END_FRAME, PERSPECTIVE_TILT_END_FRAME, 239], [0, 0, -26, -26]);
-  const translateX = valueAt(frame, [0, PERSPECTIVE_ZOOM_END_FRAME, 239], [0, 0, 16]);
-  const translateY = valueAt(frame, [0, PERSPECTIVE_ZOOM_END_FRAME, 239], [0, 0, -8]);
-  const scale = valueAt(frame, [0, PERSPECTIVE_ZOOM_END_FRAME, 239], [1, 2, 2]);
+  const rotateX = valueAt(frame, [0, PERSPECTIVE_TILT_END_FRAME, 239], [0, 14, 14]);
+  const rotateY = valueAt(frame, [0, PERSPECTIVE_TILT_END_FRAME, 239], [0, -26, -26]);
+  const translateX = valueAt(frame, [0, PERSPECTIVE_TILT_END_FRAME, 239], [0, 0, 16]);
+  const translateY = valueAt(frame, [0, PERSPECTIVE_TILT_END_FRAME, 239], [0, 0, -8]);
+  const scale = 2;
   return `perspective(1100px) translate3d(${translateX}px, ${translateY}px, 0) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
 }
 

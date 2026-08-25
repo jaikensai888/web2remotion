@@ -80,12 +80,12 @@
         <div class="copy">
           <div class="meta"><code>perspective-tilt</code><span>camera</span></div>
           <h2>透视倾斜运镜</h2>
-          <p>先把 GitHub 网页录屏当成一张平面正面放大约 2 倍，再在这个放大后的平面上进行 X/Y 轴旋转、透视变形和缓慢运镜</p>
-          <p class="instruction"><strong>真实 GitHub 指令：</strong>使用真实 GitHub 录制，先保持网页平面正面并放大到约 2 倍，再在这个 2 倍平面上逐渐施加明显的 X/Y 轴旋转、透视变形和轻微横纵运镜；保持网页内容清晰，不重绘网页。</p>
+          <p>将 GitHub 网页录屏当成一张已放大约 2 倍的平面，直接从 2 倍大小开始，再在平面上进行 X/Y 轴旋转、透视变形和缓慢运镜</p>
+          <p class="instruction"><strong>真实 GitHub 指令：</strong>使用真实 GitHub 录制，直接以约 2 倍大小的网页平面开始，不展示放大过程；再在这个 2 倍平面上逐渐施加明显的 X/Y 轴旋转、透视变形和轻微横纵运镜；保持网页内容清晰，不重绘网页。</p>
           <p class="requirement"><strong>素材要求：</strong><code>captured-page</code></p>
           <details><summary>默认参数</summary><pre>{
   &quot;perspectivePx&quot;: 1100,
-  &quot;zoomDurationMs&quot;: 3000,
+  &quot;zoomDurationMs&quot;: 0,
   &quot;tiltDurationMs&quot;: 2000,
   &quot;rotateXFrom&quot;: 0,
   &quot;rotateXTo&quot;: 14,
@@ -99,7 +99,7 @@
     &quot;x&quot;: 16,
     &quot;y&quot;: -8
   },
-  &quot;scaleFrom&quot;: 1,
+  &quot;scaleFrom&quot;: 2,
   &quot;scaleTo&quot;: 2,
   &quot;easing&quot;: &quot;easeInOut&quot;
 }</pre></details>
