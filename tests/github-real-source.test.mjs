@@ -66,13 +66,18 @@ test('perspective tilt keeps the real GitHub page as a 3D plane', () => {
   assert.ok(perspectiveTilt, 'perspective-tilt must be registered in the effect catalog');
   assert.equal(perspectiveTilt.sourceRequirement, 'captured-page');
   assert.equal(perspectiveTilt.defaults.perspectivePx, 1100);
-  assert.equal(perspectiveTilt.defaults.rotateXFrom, 8);
-  assert.equal(perspectiveTilt.defaults.rotateYFrom, -15);
+  assert.equal(perspectiveTilt.defaults.scaleFrom, 1);
+  assert.equal(perspectiveTilt.defaults.scaleTo, 2);
+  assert.equal(perspectiveTilt.defaults.rotateXFrom, 14);
+  assert.equal(perspectiveTilt.defaults.rotateYFrom, -26);
   assert.match(perspectiveTilt.promptExample, /透视/);
   assert.match(source, /perspective-tilt/);
   assert.match(source, /perspective\(/);
   assert.match(source, /rotateX/);
   assert.match(source, /rotateY/);
+  assert.match(source, /\[14, 9, -2, -14\]/);
+  assert.match(source, /\[-26, -16, 8, 24\]/);
+  assert.match(source, /\[1, 1\.06, 2\]/);
 });
 
 test('real source composition uses OffthreadVideo instead of drawing a fake webpage', () => {
