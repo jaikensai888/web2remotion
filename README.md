@@ -39,9 +39,9 @@ npm run effects:render
 npm run effects:verify
 ```
 
-## 当前效果
+## Use Cases / 使用场景
 
-### 镜头平滑到仓库 title，并放大 3 倍
+### 1. 镜头平滑到仓库 title，并放大 3 倍
 
 `effectId`: `camera-zoom`
 
@@ -52,5 +52,19 @@ npm run effects:verify
 ```
 
 ![camera-zoom：镜头平滑到仓库 title，并放大 3 倍](renders/effects/camera-zoom.gif)
+
+该 GIF 使用真实 GitHub 页面录制生成，是单个效果预览，不是最终整片。
+
+### 2. 2 倍静止平面透视倾斜
+
+`effectId`: `perspective-tilt`
+
+可直接复制的提示词：
+
+```text
+使用真实 GitHub 页面录制作为主素材，直接以约 2 倍大小的网页平面开始，让 repository title（仓库名称）清晰可见；页面保持静止不滚动；再在这个 2 倍平面上进行 X/Y 轴旋转、透视变形和缓慢运镜。
+```
+
+![perspective-tilt：2 倍静止平面透视倾斜](renders/effects/perspective-tilt.gif)
 
 该 GIF 使用真实 GitHub 页面录制生成，是单个效果预览，不是最终整片。
